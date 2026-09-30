@@ -1,5 +1,7 @@
 # Example GitOps Repository Layout
 
+The current examples use separate stage and production directories so each Argo CD Application has an explicit environment boundary.
+
 A small application repository can be organized as follows:
 
 ```text
