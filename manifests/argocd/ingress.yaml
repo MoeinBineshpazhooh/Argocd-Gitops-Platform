@@ -4,12 +4,12 @@ metadata:
   name: argocd-server-ingress
   namespace: argocd
   annotations:
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+    haproxy.org/ssl-redirect: "true"
+    haproxy.org/backend-protocol: "https"
 spec:
-  ingressClassName: nginx
+  ingressClassName: haproxy
   rules:
-    - host: argocd.example.com
+    - host: argocd.example.local
       http:
         paths:
           - path: /
@@ -21,5 +21,5 @@ spec:
                   number: 443
   tls:
     - hosts:
-        - argocd.example.com
+        - argocd.example.local
       secretName: argocd-tls
