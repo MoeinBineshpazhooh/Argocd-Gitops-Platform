@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-app-stage
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: example-app
+    app.kubernetes.io/part-of: example-gitops
+    environment: stage
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.example.local/platform/example-gitops.git
+    targetRevision: devops
+    path: environments/stage
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: example-stage
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
