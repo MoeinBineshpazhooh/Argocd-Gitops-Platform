@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: example-app-production
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: example-app
+    app.kubernetes.io/part-of: example-gitops
+    environment: production
+  annotations:
+    notifications.argoproj.io/subscribe.on-production-outofsync.email: platform-alerts@example.local
+spec:
+  project: default
+  source:
+    repoURL: https://gitlab.example.local/platform/example-gitops.git
+    targetRevision: devops
+    path: environments/production
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: example-production
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
