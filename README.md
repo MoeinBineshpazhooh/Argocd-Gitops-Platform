@@ -497,3 +497,105 @@ It does **not** claim that every advanced Argo CD capability is implemented. Fea
 <strong>Practical Argo CD GitOps application delivery for Kubernetes environments.</strong>
 
 </div>
+
+## 🔄 Current GitOps Implementation
+
+This section reflects the current implementation documented in the repository. Environment-specific names, usernames, tokens, image tags and addresses are intentionally fake.
+
+### Delivery flow
+
+~~~text
+Application CI
+      |
+      | build / test / image
+      v
+Container Registry
+      |
+      | update GitOps manifest
+      v
+GitOps Repository
+      |
+      | devops revision
+      v
+    Argo CD
+      |-----------------------|
+      v                       v
+   Stage                  Production
+   auto sync              manual sync
+   self-heal              operator review
+   prune                  notification
+~~~
+
+Stage is used for automated validation. Production is intentionally kept as an explicit synchronization step so a validated Git revision can be reviewed before rollout.
+
+### GitLab network direction
+
+~~~text
+Argo CD repo-server
+        |
+        | HTTPS / TCP 443
+        v
+      GitLab
+~~~
+
+GitLab does not need to initiate a connection to the Kubernetes API simply because Argo CD consumes the Git repository. Argo CD pulls the desired state and then communicates with the Kubernetes API.
+
+### Production OutOfSync alerting
+
+~~~text
+Production Application
+        |
+        v
+    OutOfSync
+        |
+        v
+Notifications Controller
+        |
+        v
+Configured notification provider
+        |
+        v
+Operator
+~~~
+
+The repository now contains an example Notifications Controller ConfigMap and deliberately fake notification credentials. See docs/notifications.md.
+
+### Example application promotion
+
+~~~text
+Git revision
+    |
+    v
+Stage Application
+    |
+    +--> automated sync
+    |
+    v
+Health validation
+    |
+    v
+Production Application
+    |
+    +--> OutOfSync notification
+    |
+    v
+Manual Sync
+~~~
+
+### New documentation
+
+- docs/gitops-workflow.md — CI, GitOps, Argo CD and Kubernetes delivery flow
+- docs/production-approval.md — stage validation and controlled production synchronization
+- docs/notifications.md — Notifications Controller and OutOfSync alerting
+- manifests/applications/example-stage.yaml — automated stage Application
+- manifests/applications/example-production.yaml — manual production Application
+- manifests/argocd/notifications-cm.yaml — example notification configuration
+- manifests/argocd/notifications-secret.example.yaml — fake notification credentials only
+- manifests/argocd/repository-secret.example.yaml — fake GitLab repository credentials only
+- manifests/argocd/project-example.yaml — example AppProject
+- manifests/environments/stage/ — stage workload
+- manifests/environments/production/ — production workload
+
+### Portfolio safety
+
+Never replace the example credentials in this repository with real credentials. Real GitLab tokens, passwords, SMTP credentials, certificates and private infrastructure values belong in the actual environment's secret-management workflow, not in a public portfolio repository.
