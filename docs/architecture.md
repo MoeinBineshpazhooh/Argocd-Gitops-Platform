@@ -2,7 +2,9 @@
 
 ## Purpose
 
-This project uses Argo CD as the GitOps reconciliation layer between a Git repository containing Kubernetes desired state and a Kubernetes cluster containing the live state.
+This project uses Argo CD as the GitOps reconciliation layer between a Git repository
+
+The example source is a private GitLab repository. Argo CD reaches GitLab over the repository server's HTTPS path; the GitLab side does not need an inbound Kubernetes API connection merely for repository consumption. containing Kubernetes desired state and a Kubernetes cluster containing the live state.
 
 ## High-level architecture
 
@@ -131,6 +133,8 @@ The repository separates:
 Credentials are not stored in Git. Repository credentials and TLS private keys must be supplied securely at deployment time.
 
 ## Operational model
+
+The current example separates stage validation from production rollout. Stage reconciles automatically; production remains OutOfSync until an operator reviews and synchronizes the approved revision.
 
 The intended operational model is:
 
