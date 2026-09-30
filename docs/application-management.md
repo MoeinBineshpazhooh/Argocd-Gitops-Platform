@@ -2,6 +2,8 @@
 
 ## Application lifecycle
 
+This repository demonstrates two application policies: automated reconciliation for stage and explicit synchronization for production.
+
 A typical Argo CD Application lifecycle is:
 
 ```text
@@ -32,17 +34,17 @@ Compare desired/live state
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
+  name: example-app-stage
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://gitlab.example.local/platform/my-app.git
-    path: manifests/workloads
-    targetRevision: main
+    repoURL: https://gitlab.example.local/platform/example-gitops.git
+    path: environments/stage
+    targetRevision: devops
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: example-stage
   syncPolicy:
     automated:
       prune: true
