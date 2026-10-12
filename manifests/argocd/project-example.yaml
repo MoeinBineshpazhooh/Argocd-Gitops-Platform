@@ -6,7 +6,7 @@ metadata:
 spec:
   description: Example GitOps project for portfolio documentation
   sourceRepos:
-    - https://gitlab.example.local/platform/*
+    - https://gitlab.example.local/platform/example-gitops.git
   destinations:
     - namespace: example-stage
       server: https://kubernetes.default.svc
@@ -16,5 +16,7 @@ spec:
     - group: ""
       kind: Namespace
   namespaceResourceWhitelist:
-    - group: "*"
-      kind: "*"
+    - group: apps
+      kind: Deployment
+    - group: ""
+      kind: Service

@@ -9,7 +9,7 @@ metadata:
   annotations:
     notifications.argoproj.io/subscribe.on-production-outofsync.email: platform-alerts@example.local
 spec:
-  project: default
+  project: example-platform
   source:
     repoURL: https://gitlab.example.local/platform/example-gitops.git
     targetRevision: devops

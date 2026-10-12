@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/name: example-app
     environment: stage
 spec:
-  project: default
+  project: example-platform
   source:
     repoURL: https://gitlab.example.local/platform/example-gitops.git
     targetRevision: devops
