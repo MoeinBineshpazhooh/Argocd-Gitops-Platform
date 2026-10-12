@@ -61,7 +61,7 @@ Apply `manifests/argocd/ingress.yaml` after replacing the placeholder hostname w
 
 The supplied manifest targets HAProxy Technologies' Kubernetes Ingress Controller with `ingressClassName: haproxy`. It terminates client TLS at the ingress and uses `haproxy.org/server-ssl: "true"` for TLS to the Argo CD server on port 443. Confirm the matching IngressClass exists and the server serves TLS. Configure backend CA trust according to your controller version; encryption alone does not establish backend certificate verification.
 
-The original portfolio implementation describes NGINX. To reproduce that deployment, supply a controller-specific NGINX manifest instead of applying HAProxy annotations. See the [HAProxy annotation reference](https://www.haproxy.com/documentation/kubernetes-ingress/community/configuration-reference/ingress/).
+For controller-specific options and annotation behavior, see the [HAProxy Kubernetes Ingress Controller annotation reference](https://www.haproxy.com/documentation/kubernetes-ingress/community/configuration-reference/ingress/).
 
 ```bash
 kubectl apply -f manifests/argocd/ingress.yaml
