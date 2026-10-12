@@ -31,7 +31,7 @@ This is a portfolio case study with sanitized example manifests. It is not a tur
 ## 🎯 What I Actually Implemented
 
 - Installed and configured **Argo CD** inside Kubernetes.
-- Exposed the Argo CD server through **NGINX Ingress** with HTTPS/TLS. The supplied example manifest uses **HAProxy Kubernetes Ingress Controller**; see [Installation](docs/installation.md) for its prerequisites.
+- Exposed the Argo CD server through **HAProxy Kubernetes Ingress Controller** with HTTPS/TLS; see [Installation](docs/installation.md) for setup and TLS considerations.
 - Configured an Argo CD endpoint using a Kubernetes TLS secret.
 - Installed and used the **Argo CD CLI** for day-to-day administration.
 - Managed Argo CD through both the **CLI and web GUI**.
@@ -252,7 +252,7 @@ metadata:
   name: my-app
   namespace: argocd
 spec:
-  project: default
+  project: example-platform
   source:
     repoURL: https://gitlab.example.local/platform/my-app.git
     path: manifests/workloads
