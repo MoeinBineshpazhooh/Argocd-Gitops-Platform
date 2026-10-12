@@ -8,6 +8,8 @@ Keep real GitLab tokens, SMTP credentials, private keys, local environment files
 
 Dependabot proposes weekly updates to GitHub Actions and Python dependencies when its configuration is merged. No automatic merge is configured. CI does not verify a running Kubernetes deployment or production RBAC.
 
+The full-history scan identified one deliberately fake provider-shaped token in the original example Secret. Its historical file was checked against the documented fake value before adding one exact commit/file/rule/line fingerprint to `.gitleaksignore`. The current template uses a plain replacement marker. No entire path, provider rule or commit range is excluded.
+
 ## Proposed main protection
 
 `.github/rulesets/main.json` is an importable proposal; a committed JSON file does not enable GitHub protection. It requires pull requests, up-to-date `validate` and `secrets` checks, resolved conversations, and blocks branch deletion and force pushes. Zero independent approvals supports a solo-maintainer workflow; add one when a second maintainer is available. No bypass actor is proposed.
