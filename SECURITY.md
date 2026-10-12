@@ -4,7 +4,7 @@ Keep real GitLab tokens, SMTP credentials, private keys, local environment files
 
 ## Automated checks
 
-`validate` checks YAML, local links and stage/production example policies. `secrets` uses a pinned Gitleaks action and engine with read-only permissions and redacted output. Push/PR runs check their commit range; a manual run scans available Git history. Automatic PR comments, report artifacts and summaries are disabled. Pattern scanning is not proof that all secrets are absent. Investigate findings and use narrow documented exceptions only for verified fake values.
+`validate` checks YAML, local links and stage/production example policies. `secrets` uses a pinned Gitleaks action and engine with read-only permissions and redacted output. Each run checks the pushed/PR commit range, followed by an explicit scan of all fetched Git history. Automatic PR comments, report artifacts and summaries are disabled. Pattern scanning is not proof that all secrets are absent. Investigate findings and use narrow documented exceptions only for verified fake values.
 
 Dependabot proposes weekly updates to GitHub Actions and Python dependencies when its configuration is merged. No automatic merge is configured. CI does not verify a running Kubernetes deployment or production RBAC.
 
