@@ -2,9 +2,9 @@
 
 ## Purpose
 
-This project uses Argo CD as the GitOps reconciliation layer between a Git repository
+This project uses Argo CD as the reconciliation layer between Kubernetes desired state in Git and live state in a Kubernetes cluster.
 
-The example source is a private GitLab repository. Argo CD reaches GitLab over the repository server's HTTPS path; the GitLab side does not need an inbound Kubernetes API connection merely for repository consumption. containing Kubernetes desired state and a Kubernetes cluster containing the live state.
+The example source is a private GitLab repository. Argo CD reaches GitLab over HTTPS from the repo-server; GitLab does not need an inbound Kubernetes API connection for repository consumption.
 
 ## High-level architecture
 
@@ -104,13 +104,13 @@ syncPolicy:
 
 ## Ingress architecture
 
-The sample exposes the Argo CD server through an NGINX Ingress with TLS.
+The sample exposes the Argo CD server through an HAProxy Ingress with TLS.
 
 ```text
 Client
   │ HTTPS
   ▼
-NGINX Ingress
+HAProxy Ingress
   │ HTTPS to backend
   ▼
 argocd-server :443

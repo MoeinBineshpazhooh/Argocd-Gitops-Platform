@@ -1,11 +1,11 @@
 # Installation
 
-This guide installs Argo CD into a Kubernetes cluster and exposes the Argo CD server through an NGINX Ingress with TLS.
+This guide installs Argo CD into a Kubernetes cluster and exposes the Argo CD server through an HAProxy Ingress with TLS.
 
 ## Prerequisites
 
 - Kubernetes cluster with `kubectl` access
-- NGINX Ingress Controller
+- HAProxy Ingress Controller
 - DNS record for the Argo CD hostname
 - TLS certificate and private key for that hostname
 - Network access to the Argo CD manifests, or a prepared offline copy for restricted environments
@@ -58,6 +58,10 @@ Never commit the certificate private key or the generated Secret manifest to Git
 ## 5. Configure the Ingress
 
 Apply `manifests/argocd/ingress.yaml` after replacing the placeholder hostname with the target environment's DNS name.
+
+The supplied manifest targets HAProxy Technologies' Kubernetes Ingress Controller with `ingressClassName: haproxy`. It terminates client TLS at the ingress and uses `haproxy.org/server-ssl: "true"` for TLS to the Argo CD server on port 443. Confirm the matching IngressClass exists and the server serves TLS. Configure backend CA trust according to your controller version; encryption alone does not establish backend certificate verification.
+
+The original portfolio implementation describes NGINX. To reproduce that deployment, supply a controller-specific NGINX manifest instead of applying HAProxy annotations. See the [HAProxy annotation reference](https://www.haproxy.com/documentation/kubernetes-ingress/community/configuration-reference/ingress/).
 
 ```bash
 kubectl apply -f manifests/argocd/ingress.yaml

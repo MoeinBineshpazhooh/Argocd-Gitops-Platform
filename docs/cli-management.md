@@ -94,7 +94,7 @@ argocd app sync my-app
 Refresh the application's repository state:
 
 ```bash
-argocd app refresh my-app
+argocd app get my-app --refresh
 ```
 
 Wait for synchronization and health:
