@@ -254,7 +254,7 @@ metadata:
 spec:
   project: example-platform
   source:
-    repoURL: https://gitlab.example.local/platform/my-app.git
+    repoURL: https://gitlab.example.local/platform/example-gitops.git
     path: manifests/workloads
     targetRevision: main
   destination:
