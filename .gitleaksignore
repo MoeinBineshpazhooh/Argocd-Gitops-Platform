@@ -1,0 +1,3 @@
+# Verified fake token in the original example-only Secret template.
+# This exception is limited to the exact historical commit, file, rule and line.
+580bc25c4389124513cf2419513dfe6ea22c39e3:manifests/argocd/repository-secret.example.yaml:gitlab-pat:16

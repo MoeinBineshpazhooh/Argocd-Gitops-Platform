@@ -1,3 +1,13 @@
 .venv/
 __pycache__/
 *.pyc
+
+# Local credentials and certificate bundles
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+**/certs/
