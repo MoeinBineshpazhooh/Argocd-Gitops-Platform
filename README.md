@@ -608,3 +608,7 @@ Manual Sync
 ### Portfolio safety
 
 Never replace the example credentials in this repository with real credentials. Real GitLab tokens, passwords, SMTP credentials, certificates and private infrastructure values belong in the actual environment's secret-management workflow, not in a public portfolio repository.
+
+## 📄 License
+
+This repository's original examples and documentation are distributed under the [MIT License](LICENSE). Example manifests are illustrative and must be reviewed and adapted before use in any real environment.
