@@ -57,7 +57,7 @@ Stage is the validation environment.
 - Pruning: enabled
 - Namespace: example-stage
 
-A successful stage synchronization is the validation gate before production synchronization.
+A successful stage synchronization and healthy resources are prerequisites for validation. Run application smoke/integration tests and approve the exact Git commit and image artifacts before production synchronization. See [Production Approval](production-approval.md).
 
 ## Production
 

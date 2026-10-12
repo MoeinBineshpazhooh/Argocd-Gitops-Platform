@@ -10,7 +10,7 @@
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-Deployment-326CE5?logo=kubernetes&logoColor=white)
 ![GitOps](https://img.shields.io/badge/GitOps-Declarative-111827)
 ![GitLab](https://img.shields.io/badge/GitLab-Repository-FC6D26?logo=gitlab&logoColor=white)
-![NGINX](https://img.shields.io/badge/NGINX-Ingress-009639?logo=nginx&logoColor=white)
+![HAProxy](https://img.shields.io/badge/HAProxy-Example_Ingress-009639)
 ![TLS](https://img.shields.io/badge/TLS-HTTPS-6B7280)
 ![Air--Gapped](https://img.shields.io/badge/Environment-Air--Gapped-111827)
 
@@ -18,10 +18,20 @@
 
 > **Portfolio case study:** this repository demonstrates the practical deployment and operation of Argo CD as a GitOps delivery layer for Kubernetes, including Git-based application management, automated reconciliation, CLI and GUI operations, HTTPS exposure, private Git integration, and restricted-environment considerations.
 
+## Start here
+
+This is a portfolio case study with sanitized example manifests. It is not a turnkey installation of the external GitLab repository referenced by the Applications.
+
+- [Installation](docs/installation.md): Argo CD, HAProxy ingress, TLS and CLI setup.
+- [GitOps workflow](docs/gitops-workflow.md): automatic stage synchronization and manual production rollout.
+- [Production approval](docs/production-approval.md): validate and sync an exact Git commit.
+- [Repository layout](examples/repository-layout.md): map external GitLab source paths to the examples here.
+- [Validation](docs/validation.md): run the same checks locally and in GitHub Actions.
+
 ## 🎯 What I Actually Implemented
 
 - Installed and configured **Argo CD** inside Kubernetes.
-- Exposed the Argo CD server through **NGINX Ingress** with HTTPS/TLS.
+- Exposed the Argo CD server through **NGINX Ingress** with HTTPS/TLS. The supplied example manifest uses **HAProxy Kubernetes Ingress Controller**; see [Installation](docs/installation.md) for its prerequisites.
 - Configured an Argo CD endpoint using a Kubernetes TLS secret.
 - Installed and used the **Argo CD CLI** for day-to-day administration.
 - Managed Argo CD through both the **CLI and web GUI**.
@@ -36,7 +46,6 @@
 - Documented private Git repository and restricted / **air-gapped** deployment considerations.
 - Sanitized environment-specific addresses, credentials, certificates and access tokens for portfolio publication.
 
-image_group{"layout":"carousel","aspect_ratio":"16:9","query":["Argo CD GitOps architecture Kubernetes","Argo CD application dashboard Kubernetes","GitOps Argo CD deployment workflow"],"num_per_query":1}
 
 ## 🏗️ GitOps Delivery Lifecycle
 
@@ -98,7 +107,7 @@ User / Operator
  argocd.example.com
        │
        ▼
- NGINX Ingress
+ HAProxy Ingress
        │
        │ HTTPS
        ▼
@@ -120,7 +129,7 @@ User / Operator
 | Synchronization | Automated / Manual |
 | Drift Handling | Self-heal |
 | Resource Cleanup | Automatic pruning |
-| Web Access | NGINX Ingress |
+| Example Web Access | HAProxy Ingress |
 | Transport Security | HTTPS / TLS |
 | Administration | Argo CD CLI + Web GUI |
 | Application Source | Kubernetes manifests |

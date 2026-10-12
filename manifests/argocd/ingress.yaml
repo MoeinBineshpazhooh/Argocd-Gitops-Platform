@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
   annotations:
     haproxy.org/ssl-redirect: "true"
-    haproxy.org/backend-protocol: "https"
+    haproxy.org/server-ssl: "true"
 spec:
   ingressClassName: haproxy
   rules:

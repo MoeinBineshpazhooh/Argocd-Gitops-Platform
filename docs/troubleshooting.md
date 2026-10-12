@@ -28,7 +28,7 @@ kubectl get pods -n argocd
 Validate:
 
 - DNS resolves to the expected ingress endpoint.
-- NGINX Ingress Controller is healthy.
+- HAProxy Ingress Controller is healthy.
 - TLS Secret exists.
 - The Ingress hostname matches the certificate.
 - Network policy/firewall rules permit access.

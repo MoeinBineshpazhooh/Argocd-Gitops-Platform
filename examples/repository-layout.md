@@ -2,6 +2,17 @@
 
 The current examples use separate stage and production directories so each Argo CD Application has an explicit environment boundary.
 
+The `example-stage.yaml` and `example-production.yaml` Applications refer to an **external GitLab repository** and its `devops` branch. Their paths are relative to that repository's root:
+
+| Application source path in GitLab | Sample files in this repository |
+|---|---|
+| `environments/stage` | `manifests/environments/stage/` |
+| `environments/production` | `manifests/environments/production/` |
+
+Copy the sample workload directories to those paths in the external repository, create the configured branch, and replace the placeholder repository URL and image reference before applying the Applications. If using this repository itself as the source, configure `repoURL`, `targetRevision` and the `manifests/environments/...` paths accordingly.
+
+Apply only the configuration needed for your example. Do not apply all of `manifests/` recursively: it includes alternative Applications and fake Secret templates.
+
 A small application repository can be organized as follows:
 
 ```text

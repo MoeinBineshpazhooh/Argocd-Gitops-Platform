@@ -134,7 +134,7 @@ Inspect:
 
 ```bash
 argocd app get my-app
-argocd app refresh my-app
+argocd app get my-app --refresh
 ```
 
 Confirm that:
